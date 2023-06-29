@@ -44,34 +44,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     return textMesh;
   };
 
-  const loadDisney = async () => {
-
-    const videoSet = await makeVideoPlane('assets/videos/Disney.mp4');
-    const anchor = mindarThree.addAnchor(0);
-    anchor.group.add(videoSet.plane);
-    anchor.onTargetFound = () => {
+  const setupMoviePlane = async (anchorIndex, url) => {
+    const anchor = mindarThree.addAnchor(anchorIndex);
+    anchor.onTargetFound = async () => {
+      const videoSet = await makeVideoPlane(url);
+      anchor.onTargetLost = () => {
+        videoSet.video.pause();
+      }
+      anchor.group.add(videoSet.plane);
       videoSet.video.play();
     }
-    anchor.onTargetLost = () => {
-      videoSet.video.pause();
-    }
-    const textMesh = makeTextMesh('Disney');
-    anchor.group.add(textMesh);
-
-  }
-
-  const loadSnow = async () => {
-    const videoSet = await makeVideoPlane('assets/videos/snow.mp4');
-    const anchor = mindarThree.addAnchor(1);
-    anchor.group.add(videoSet.plane);
-    anchor.onTargetFound = () => {
-      videoSet.video.play();
-    }
-    anchor.onTargetLost = () => {
-      videoSet.video.pause();
-    }
-    const textMesh = makeTextMesh('Disney');
-    anchor.group.add(textMesh);
   };
 
   const Start = async () => {
@@ -81,17 +63,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       imageTargetSrc: './assets/targets/targets.mind',
     });
     const { renderer, scene, camera } = mindarThree;
+
+    setupMoviePlane(0, 'assets/videos/Disney.mp4');
+    setupMoviePlane(1, 'assets/videos/snow.mp4');
+
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
     });
-
   }
 
   const startButton = document.getElementById('start-button');
   startButton.addEventListener('click', Start);
-  const startSnowButton = document.getElementById('start-snow-button');
-  startSnowButton.addEventListener('click', loadSnow);
-  const startDesneyButton = document.getElementById('start-disney-button');
-  startDesneyButton.addEventListener('click', loadDisney);
 });
