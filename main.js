@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     const { renderer, scene, camera } = mindarThree;
 
-    setupMoviePlane(0, 'assets/videos/openLab.mov');
+    setupMoviePlane(0, 'assets/videos/openLab.mp4');
     setupMoviePlane(1, 'assets/videos/hatake.mp4');
     setupMoviePlane(2, 'assets/videos/terus.mp4');
     setupMoviePlane(3, 'assets/videos/hunsui.mp4');
