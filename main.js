@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
   }
 
-  const makeVideoPlane = async (videoPath) => {
+  const makeVideoPlane2 = async (videoPath) => {
     const video = await loadVideo(videoPath);
     const texture = new THREE.VideoTexture(video);
     const geometry = new THREE.PlaneGeometry(1, 16 / 9);
@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       video: video,
     };
   }
+
+  
 
   const makeImagePlane = async (imagePath) => {
     const image = await loadimage(imagePath);
@@ -71,10 +73,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     return textMesh;
   };
 
-  const setupMoviePlane = async (anchorIndex, url) => {
+  const setupMoviePlane1 = async (anchorIndex, url) => {
     const anchor = mindarThree.addAnchor(anchorIndex);
     anchor.onTargetFound = async () => {
-      const videoSet = await makeVideoPlane(url);
+      const videoSet = await makeVideoPlane1(url);
       anchor.onTargetLost = () => {
         videoSet.video.pause();
       }
@@ -82,6 +84,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       videoSet.video.play();
     }
   };
+
+  const setupMoviePlane2 = async (anchorIndex, url) => {
+    const anchor = mindarThree.addAnchor(anchorIndex);
+    anchor.onTargetFound = async () => {
+      const videoSet = await makeVideoPlane2(url);
+      anchor.onTargetLost = () => {
+        videoSet.video.pause();
+      }
+      anchor.group.add(videoSet.plane);
+      videoSet.video.play();
+    }
+  };
+
 
   const setupImagePlane = async (anchorIndex, url) => {
     const anchor = mindarThree.addAnchor(anchorIndex);
@@ -100,10 +115,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { renderer, scene, camera } = mindarThree;
 
     setupMoviePlane1(0, 'assets/videos/sumple.mp4');
-    setupMoviePlane(1, 'assets/videos/openLab.mp4');
-    setupMoviePlane(2, 'assets/videos/hatake.mp4');
-    setupMoviePlane(3, 'assets/videos/terus.mp4');
-    setupMoviePlane(4, 'assets/videos/hunsui.mp4');
+    setupMoviePlane2(1, 'assets/videos/openLab.mp4');
+    setupMoviePlane2(2, 'assets/videos/hatake.mp4');
+    setupMoviePlane2(3, 'assets/videos/terus.mp4');
+    setupMoviePlane2(4, 'assets/videos/hunsui.mp4');
 
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
