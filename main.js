@@ -15,10 +15,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     font = _font;
   });
 
+  const makeVideoPlane1 = async (videoPath) => {
+    const video = await loadVideo(videoPath);
+    const texture = new THREE.VideoTexture(video);
+    const geometry = new THREE.PlaneGeometry(1, 9 / 16);
+    const material = new THREE.MeshBasicMaterial({ map: texture });
+    const plane = new THREE.Mesh(geometry, material);
+    video.addEventListener('play', () => {
+      video.currentTime = 0;
+    });
+    return {
+      plane: plane,
+      video: video,
+    };
+  }
+
   const makeVideoPlane = async (videoPath) => {
     const video = await loadVideo(videoPath);
     const texture = new THREE.VideoTexture(video);
-    const geometry = new THREE.PlaneGeometry(1, 270 / 480);
+    const geometry = new THREE.PlaneGeometry(1, 16 / 9);
     const material = new THREE.MeshBasicMaterial({ map: texture });
     const plane = new THREE.Mesh(geometry, material);
     video.addEventListener('play', () => {
@@ -84,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     const { renderer, scene, camera } = mindarThree;
 
-    setupMoviePlane(0, 'assets/videos/sumple.mp4');
+    setupMoviePlane1(0, 'assets/videos/sumple.mp4');
     setupMoviePlane(1, 'assets/videos/openLab.mp4');
     setupMoviePlane(2, 'assets/videos/hatake.mp4');
     setupMoviePlane(3, 'assets/videos/terus.mp4');
