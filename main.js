@@ -9,16 +9,17 @@ const THREE = window.MINDAR.IMAGE.THREE;
 document.addEventListener('DOMContentLoaded', async () => {
   let mindarThree = null;
   
-  let font = null;
-  const fontLoader = new THREE.FontLoader();
-  fontLoader.load('../assets/fonts/helvetiker_regular.typeface.json', (_font) => {
-    font = _font;
-  });
+  // let font = null;
+  // const fontLoader = new THREE.FontLoader();
+  // fontLoader.load('../assets/fonts/helvetiker_regular.typeface.json', (_font) => {
+  //   font = _font;
+  // });
 
   const makeVideoPlane1 = async (videoPath) => {
     const video = await loadVideo(videoPath);
     const texture = new THREE.VideoTexture(video);
-    const geometry = new THREE.PlaneGeometry(1, 3 / 4);
+    const geometry = new THREE.PlaneGeometry(1, 3 / 4
+);
     const material = new THREE.MeshBasicMaterial({ map: texture });
     const plane = new THREE.Mesh(geometry, material);
     video.addEventListener('play', () => {
