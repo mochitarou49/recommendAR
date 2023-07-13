@@ -60,15 +60,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   const loadtest = async () => {
     setupMoviePlane1(1, 'assets/videos/veranda.mp4');
 
-    // const videoSet = await makeVideoPlane1('assets/videos/test.mp4');
-    // const anchor = mindarThree.addAnchor(0);
-    // anchor.group.add(videoSet.plane);
-    // anchor.onTargetFound = () => {
-    //   videoSet.video.play();
-    // }
-    // anchor.onTargetLost = () => {
-    //   videoSet.video.pause();
-    // }
+    const videoSet = await makeVideoPlane1('assets/videos/test.mp4');
+    const anchor = mindarThree.addAnchor(0);
+    anchor.group.add(videoSet.plane);
+    anchor.onTargetFound = () => {
+      videoSet.video.play();
+    }
+    anchor.onTargetLost = () => {
+      videoSet.video.pause();
+    }
     // const textMesh = makeTextMesh('Disney');
     // anchor.group.add(textMesh);
 
