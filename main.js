@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const makeVideoPlane1 = async (videoPath) => {
     const video = await loadVideo(videoPath);
     const texture = new THREE.VideoTexture(video);
-    const geometry = new THREE.PlaneGeometry(1, 3 / 4
-);
+    const geometry = new THREE.PlaneGeometry(1, 3 / 4);
     const material = new THREE.MeshBasicMaterial({ map: texture });
     const plane = new THREE.Mesh(geometry, material);
     video.addEventListener('play', () => {
@@ -31,20 +30,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
   }
 
-  const makeVideoPlane2 = async (videoPath) => {
-    const video = await loadVideo(videoPath);
-    const texture = new THREE.VideoTexture(video);
-    const geometry = new THREE.PlaneGeometry(1, 16 / 9);
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-    const plane = new THREE.Mesh(geometry, material);
-    video.addEventListener('play', () => {
-      video.currentTime = 0;
-    });
-    return {
-      plane: plane,
-      video: video,
-    };
-  }
 
   const makeTextMesh = (text) => {
     const textMesh = new THREE.Mesh(
@@ -72,16 +57,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  const setupMoviePlane2 = async (anchorIndex, url) => {
-    const anchor = mindarThree.addAnchor(anchorIndex);
+  const loadtest = async () => {
+    const anchor = mindarThree.addAnchor(0);
     anchor.onTargetFound = async () => {
-      const videoSet = await makeVideoPlane2(url);
+      const videoSet = await makeVideoPlane1('assets/videos/test.mp4');
+      anchor.group.add(videoSet.plane);
+      videoSet.video.play();
+
       anchor.onTargetLost = () => {
         videoSet.video.pause();
       }
-      anchor.group.add(videoSet.plane);
-      videoSet.video.play();
     }
+    // const textMesh = makeTextMesh('Disney');
+    // anchor.group.add(textMesh);
+
   };
 
   const Start = async () => {
@@ -91,19 +80,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       imageTargetSrc: './assets/targets/targets.mind',
     });
     const { renderer, scene, camera } = mindarThree;
-
-    setupMoviePlane1(0, 'assets/videos/test.mp4');
-    setupMoviePlane1(1, 'assets/videos/veranda.mp4');
-    setupMoviePlane1(2, 'assets/videos/27-19.mp4');
-    setupMoviePlane1(3, 'assets/videos/33-2.mp4');
-    setupMoviePlane1(4, 'assets/videos/connect.mp4');
-
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
     });
+
+    loadtest;
+
+    // setupMoviePlane1(0, 'assets/videos/test.mp4');
+    setupMoviePlane1(1, 'assets/videos/veranda.mp4');
+    // setupMoviePlane1(2, 'assets/videos/27-19.mp4');
+    // setupMoviePlane1(3, 'assets/videos/33-2.mp4');
+    // setupMoviePlane1(4, 'assets/videos/connect.mp4');
+
   }
 
   const startButton = document.getElementById('start-button');
   startButton.addEventListener('click', Start);
+  const startDesneyButton = document.getElementById('start-disney-button');
+  startDesneyButton.addEventListener('click', loadtest);
 });
