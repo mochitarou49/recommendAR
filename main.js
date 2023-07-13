@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadtest;
 
     // setupMoviePlane1(0, 'assets/videos/test.mp4');
-    // setupMoviePlane1(1, 'assets/videos/veranda.mp4');
+    setupMoviePlane1(1, 'assets/videos/veranda.mp4');
     // setupMoviePlane1(2, 'assets/videos/27-19.mp4');
     // setupMoviePlane1(3, 'assets/videos/33-2.mp4');
     // setupMoviePlane1(4, 'assets/videos/connect.mp4');
