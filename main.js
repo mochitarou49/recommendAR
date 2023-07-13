@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   const loadtest = async () => {
-    setupMoviePlane1(1, 'assets/videos/veranda.mp4');
 
     const videoSet = await makeVideoPlane1('assets/videos/test.mp4');
     const anchor = mindarThree.addAnchor(0);
