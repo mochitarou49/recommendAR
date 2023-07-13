@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const makeVideoPlane1 = async (videoPath) => {
     const video = await loadVideo(videoPath);
     const texture = new THREE.VideoTexture(video);
-    const geometry = new THREE.PlaneGeometry(1, 3 / 4);
+    const geometry = new THREE.PlaneGeometry(1, 9 / 16);
     const material = new THREE.MeshBasicMaterial({ map: texture });
     const plane = new THREE.Mesh(geometry, material);
     video.addEventListener('play', () => {
