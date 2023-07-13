@@ -58,20 +58,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
 
   const loadtest = async () => {
-    const anchor = mindarThree.addAnchor(0);
-    anchor.onTargetFound = async () => {
-      const videoSet = await makeVideoPlane1('assets/videos/test.mp4');
-      anchor.group.add(videoSet.plane);
-      videoSet.video.play();
 
-      anchor.onTargetLost = () => {
-        videoSet.video.pause();
-      }
+    const videoSet = await makeVideoPlane1('assets/videos/test.mp4');
+    const anchor = mindarThree.addAnchor(0);
+    anchor.group.add(videoSet.plane);
+    anchor.onTargetFound = () => {
+      videoSet.video.play();
+    }
+    anchor.onTargetLost = () => {
+      videoSet.video.pause();
     }
     // const textMesh = makeTextMesh('Disney');
     // anchor.group.add(textMesh);
 
   };
+
 
   const Start = async () => {
 
