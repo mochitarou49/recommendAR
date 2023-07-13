@@ -59,50 +59,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const load0 = async () => {
 
-    const videoSet0 = await makeVideoPlane1('assets/videos/terrace.mp4');
-    const anchor0 = mindarThree.addAnchor(0);
-    const videoSet1 = await makeVideoPlane1('assets/videos/veranda.mp4');
-    const anchor1 = mindarThree.addAnchor(1);
-    const videoSet2 = await makeVideoPlane1('assets/videos/27-19.mp4');
-    const anchor2 = mindarThree.addAnchor(2);
-    const videoSet3 = await makeVideoPlane1('assets/videos/33-2.mp4');
-    const anchor3 = mindarThree.addAnchor(3);
-    const videoSet4 = await makeVideoPlane1('assets/videos/connect.mp4');
-    const anchor4 = mindarThree.addAnchor(4);
-    anchor0.group.add(videoSet0.plane);
-    anchor0.onTargetFound = () => {
-      videoSet0.video.play();
+    const videoSet = await makeVideoPlane1('assets/videos/terrace.mp4');
+    const anchor = mindarThree.addAnchor(0);
+    anchor.group.add(videoSet.plane);
+    anchor.onTargetFound = () => {
+      videoSet.video.play();
     }
-    anchor0.onTargetLost = () => {
-      videoSet0.video.pause();
-    }
-    anchor1.group.add(videoSet1.plane);
-    anchor1.onTargetFound = () => {
-      videoSet1.video.play();
-    }
-    anchor1.onTargetLost = () => {
-      videoSet1.video.pause();
-    }
-    anchor2.group.add(videoSet2.plane);
-    anchor2.onTargetFound = () => {
-      videoSet2.video.play();
-    }
-    anchor2.onTargetLost = () => {
-      videoSet2.video.pause();
-    }
-    anchor3.group.add(videoSet3.plane);
-    anchor3.onTargetFound = () => {
-      videoSet3.video.play();
-    }
-    anchor3.onTargetLost = () => {
-      videoSet3.video.pause();
-    }
-    anchor4.group.add(videoSet4.plane);
-    anchor4.onTargetFound = () => {
-      videoSet4.video.play();
-    }
-    anchor4.onTargetLost = () => {
-      videoSet4.video.pause();
+    anchor.onTargetLost = () => {
+      videoSet.video.pause();
     }
     // const textMesh = makeTextMesh('Disney');
     // anchor.group.add(textMesh);
